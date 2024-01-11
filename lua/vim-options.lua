@@ -3,6 +3,8 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set smartcase")
+vim.cmd("set nowrap")
+vim.cmd("set relativenumber")
 vim.g.mapleader = " "
 vim.api.nvim_set_option("clipboard","unnamed")
 
@@ -18,6 +20,7 @@ map('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit All" })
+map("n", "<leader>qw", ":wqa<CR>", { desc = "Write/Quit All" })
 map("n", ";", ":", { nowait = true })
 
 map("n", "<C-d>", "<C-d>zz", { silent = true })
@@ -77,6 +80,16 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- text editing
-map({ "n" }, "cw", "ciw", { desc = "Change word", remap = true })
+-- Editor
+-- map({ "n" }, "cw", "ciw", { desc = "Change word", remap = true })
+map("n", "C", "c$", { desc = "Change to end of line", remap = true })
+map("n", "<leader>rn", function()
+  if vim.wo.relativenumber then
+    vim.wo.relativenumber = false
+    vim.wo.number = true
+  else
+    vim.wo.relativenumber = true
+    vim.wo.number = false
+  end
+end, { desc = "Toggle relative line numbers" })
 

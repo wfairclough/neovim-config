@@ -48,5 +48,7 @@ return {
     dashboard.opts.opts.noautocmd = true
 
     alpha.setup(dashboard.opts)
+
+    vim.keymap.set("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "Alpha Dashboard" })
   end,
 }
