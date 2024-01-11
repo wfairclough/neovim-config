@@ -36,7 +36,7 @@ return {
     }
 
     local function footer()
-      return "Don't Stop Until You are Proud..."
+      return "Let's build great software"
     end
 
     dashboard.section.footer.val = footer()

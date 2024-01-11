@@ -50,6 +50,7 @@ return {
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to references" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
       vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
@@ -60,44 +61,6 @@ return {
       
     end,
   },
-
-  -- -- add tsserver and setup with typescript.nvim instead of lspconfig
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   dependencies = {
-  --     "jose-elias-alvarez/typescript.nvim",
-  --     init = function()
-  --       local ts
-  --       vim.api.nvim_create_autocmd("LspAttach", {
-  --         callback = function(args)
-  --           local buffer = args.buf
-  --           vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-  --           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-  --         end
-  --       })
-  --     end,
-  --   },
-  --   ---@class PluginLspOpts
-  --   opts = {
-  --     ---@type lspconfig.options
-  --     servers = {
-  --       -- tsserver will be automatically installed with mason and loaded with lspconfig
-  --       tsserver = {},
-  --     },
-  --     -- you can do any additional lsp server setup here
-  --     -- return true if you don't want this server to be setup with lspconfig
-  --     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-  --     setup = {
-  --       -- example to setup with typescript.nvim
-  --       tsserver = function(_, opts)
-  --         require("typescript").setup({ server = opts })
-  --         return true
-  --       end,
-  --       -- Specify * to use this function as a fallback for any server
-  --       -- ["*"] = function(server, opts) end,
-  --     },
-  --   },
-  -- },
   
   {
     "pmizio/typescript-tools.nvim",
