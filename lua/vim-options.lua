@@ -92,4 +92,6 @@ map("n", "<leader>rn", function()
     vim.wo.number = false
   end
 end, { desc = "Toggle relative line numbers" })
-
+-- save file
+map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save file" })
+map("n", "<leader>wa", "<cmd>wa<cr>", { desc = "Save all files" })
