@@ -61,7 +61,13 @@ return {
       -- Search
       vim.keymap.set("n", "<leader>ss", vim.lsp.buf.document_symbol, { desc = "Document symbols" })
       vim.keymap.set("n", "<leader>sS", vim.lsp.buf.workspace_symbol, { desc = "Workspace symbols" })
-      
+
+      -- LSP CMD Shortcuts
+      vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
+      vim.keymap.set("n", "<leader>lR", "<cmd>LspStop<CR>", { desc = "Stop LSP" })
+      vim.keymap.set("n", "<leader>la", "<cmd>LspStart<CR>", { desc = "Start LSP" })
+      vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<CR>", { desc = "LSP Info" })
+      vim.keymap.set("n", "<leader>lo", "<cmd>LspLog<CR>", { desc = "LSP Log" })
     end,
   },
   
