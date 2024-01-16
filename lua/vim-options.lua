@@ -95,3 +95,14 @@ end, { desc = "Toggle relative line numbers" })
 -- save file
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>wa", "<cmd>wa<cr>", { desc = "Save all files" })
+
+-- Highlight Yanked
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('highlight_yank', {}),
+  desc = 'Hightlight selection on yank',
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
+  end,
+})
+
