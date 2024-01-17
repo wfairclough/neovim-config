@@ -7,6 +7,7 @@ vim.cmd("set nowrap")
 vim.cmd("set relativenumber")
 vim.g.mapleader = " "
 vim.api.nvim_set_option("clipboard","unnamed")
+vim.opt.clipboard = "unnamedplus"
 
 local map = vim.keymap.set
 
