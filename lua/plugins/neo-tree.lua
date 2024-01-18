@@ -10,7 +10,7 @@ return {
     {
       "<leader>fe",
       function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd(), reveal = true })
       end,
       desc = "Explorer NeoTree (cwd)",
     },
@@ -25,7 +25,7 @@ return {
     {
       "<leader>be",
       function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        require("neo-tree.command").execute({ source = "buffers", toggle = true, reveal = true })
       end,
       desc = "Buffer explorer",
     },
