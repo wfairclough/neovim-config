@@ -30,6 +30,7 @@ vim.wo.number = true
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit All" })
 map("n", "<leader>qw", ":wqa<CR>", { desc = "Write/Quit All" })
+map("n", "<leader>qf", "<cmd>qa!<CR>", { desc = "Quit All Force" })
 map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
 map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
 map("n", ";", ":", { nowait = true })
@@ -112,6 +113,7 @@ end, { desc = "Toggle relative line numbers" })
 -- save file
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>wa", "<cmd>wa<cr>", { desc = "Save all files" })
+map("n", "<leader>wf", "<cmd>wa!<cr>", { desc = "Save all files force" })
 
 -- Highlight Yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
