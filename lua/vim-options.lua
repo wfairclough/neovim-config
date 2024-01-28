@@ -4,10 +4,18 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set smartcase")
 vim.cmd("set nowrap")
+vim.cmd("set noswapfile")
 vim.cmd("set relativenumber")
 vim.g.mapleader = " "
 vim.api.nvim_set_option("clipboard","unnamed")
 vim.opt.clipboard = "unnamedplus"
+
+if vim.g.vscode then
+    -- VSCode extension
+  print("VSCode extension")
+else
+    -- ordinary Neovim
+end
 
 local map = vim.keymap.set
 
@@ -73,6 +81,10 @@ map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>x", "<leader>bd", { desc = "Delete buffer", remap = true })
+
+-- use zz to center screen after C-o or C-i
+map("n", "<C-o>", "<C-o>zz", { silent = true, remap = true })
+map("n", "<C-i>", "<C-i>zz", { silent = true, remap = true })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
