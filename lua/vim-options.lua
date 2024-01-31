@@ -30,6 +30,8 @@ vim.wo.number = true
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit All" })
 map("n", "<leader>qw", ":wqa<CR>", { desc = "Write/Quit All" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
 map("n", ";", ":", { nowait = true })
 
 map("n", "<C-d>", "<C-d>zz", { silent = true })
