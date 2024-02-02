@@ -7,25 +7,25 @@ vim.cmd("set nowrap")
 vim.cmd("set noswapfile")
 vim.cmd("set relativenumber")
 vim.g.mapleader = " "
-vim.api.nvim_set_option("clipboard","unnamed")
+vim.api.nvim_set_option("clipboard", "unnamed")
 vim.opt.clipboard = "unnamedplus"
 
 if vim.g.vscode then
-    -- VSCode extension
-  print("VSCode extension")
+	-- VSCode extension
+	print("VSCode extension")
 else
-    -- ordinary Neovim
+	-- ordinary Neovim
 end
 
 local map = vim.keymap.set
 
 -- Navigate vim panes better
-map('n', '<c-k>', ':wincmd k<CR>')
-map('n', '<c-j>', ':wincmd j<CR>')
-map('n', '<c-h>', ':wincmd h<CR>')
-map('n', '<c-l>', ':wincmd l<CR>')
+map("n", "<c-k>", ":wincmd k<CR>")
+map("n", "<c-j>", ":wincmd j<CR>")
+map("n", "<c-h>", ":wincmd h<CR>")
+map("n", "<c-l>", ":wincmd l<CR>")
 
-map('n', '<leader>h', ':nohlsearch<CR>')
+map("n", "<leader>h", ":nohlsearch<CR>")
 vim.wo.number = true
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit All" })
@@ -38,15 +38,17 @@ map("n", "<C-d>", "<C-d>zz", { silent = true })
 map("n", "<C-u>", "<C-u>zz", { silent = true })
 
 map("n", "<leader>yp", function()
-  vim.cmd("let @+ = expand('%:p')")
+	vim.cmd("let @+ = expand('%:p')")
 end)
 map("n", "<leader>yt", function()
-  vim.cmd("let @+ = expand('%:t')")
+	vim.cmd("let @+ = expand('%:t')")
 end)
 map("n", "<leader>yd", function()
-  vim.cmd("let @+ = expand('%:p:h')")
+	vim.cmd("let @+ = expand('%:p:h')")
 end)
 
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -99,25 +101,24 @@ map("v", ">", ">gv")
 -- map({ "n" }, "cw", "ciw", { desc = "Change word", remap = true })
 map("n", "C", "c$", { desc = "Change to end of line", remap = true })
 map("n", "<leader>rn", function()
-  if vim.wo.relativenumber then
-    vim.wo.relativenumber = false
-    vim.wo.number = true
-  else
-    vim.wo.relativenumber = true
-    vim.wo.number = false
-  end
+	if vim.wo.relativenumber then
+		vim.wo.relativenumber = false
+		vim.wo.number = true
+	else
+		vim.wo.relativenumber = true
+		vim.wo.number = false
+	end
 end, { desc = "Toggle relative line numbers" })
 -- save file
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>wa", "<cmd>wa<cr>", { desc = "Save all files" })
 
 -- Highlight Yanked
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('highlight_yank', {}),
-  desc = 'Hightlight selection on yank',
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
-  end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("highlight_yank", {}),
+	desc = "Hightlight selection on yank",
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+	end,
 })
-
