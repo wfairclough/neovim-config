@@ -87,6 +87,11 @@ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>x", "<leader>bd", { desc = "Delete buffer", remap = true })
 
+-- Diagnostic
+map("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float() <CR>", { desc = "Open diagnostic" })
+map("n", "<leader>dn", "<cmd> lua vim.diagnostic.goto_next() <CR>", { desc = "Next diagnostic" })
+map("n", "<leader>dp", "<cmd> lua vim.diagnostic.goto_prev() <CR>", { desc = "Previous diagnostic" })
+
 -- use zz to center screen after C-o or C-i
 map("n", "<C-o>", "<C-o>zz", { silent = true, remap = true })
 map("n", "<C-i>", "<C-i>zz", { silent = true, remap = true })
