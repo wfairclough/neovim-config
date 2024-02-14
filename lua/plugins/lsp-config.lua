@@ -65,8 +65,8 @@ return {
       vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
       vim.keymap.set("n", "<leader>ct", vim.lsp.buf.type_definition, { desc = "Type definition" })
       -- Search
-      vim.keymap.set("n", "<leader>ss", vim.lsp.buf.document_symbol, { desc = "Document symbols" })
-      vim.keymap.set("n", "<leader>sS", vim.lsp.buf.workspace_symbol, { desc = "Workspace symbols" })
+      -- vim.keymap.set("n", "<leader>ss", vim.lsp.buf.document_symbol, { desc = "Document symbols" })
+      -- vim.keymap.set("n", "<leader>sS", vim.lsp.buf.workspace_symbol, { desc = "Workspace symbols" })
 
       -- LSP CMD Shortcuts
       vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
