@@ -48,7 +48,10 @@ return {
         capabilities = capabilities
       })
       lspconfig.gopls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })

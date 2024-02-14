@@ -34,6 +34,7 @@
   "rainbow_csv": { "branch": "master", "commit": "6955d13a65e0161e8dad488b6045441d527d62ec" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
   "telescope.nvim": { "branch": "master", "commit": "6213322ab56eb27356fdc09a5078e41e3ea7f3bc" },
+  "text-case.nvim": { "branch": "main", "commit": "5d85b7495c3cf8e842e4d2528edc68e6fe7c92c8" },
   "treesj": { "branch": "main", "commit": "14808da3cddd62fc86ede53a5ea1fd1635897e75" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "typescript-tools.nvim": { "branch": "master", "commit": "1469468977ea32dbcba0116c8f8fb19f1f902dca" },
