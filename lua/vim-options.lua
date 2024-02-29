@@ -35,6 +35,10 @@ map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
 map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
 map("n", ";", ":", { nowait = true })
 
+-- Disable the S-Down and S-Up paging mappings
+map("n", "<S-Down>", "<Nop>", { silent = true })
+map("n", "<S-Up>", "<Nop>", { silent = true })
+
 map("n", "<C-d>", "<C-d>zz", { silent = true })
 map("n", "<C-u>", "<C-u>zz", { silent = true })
 
