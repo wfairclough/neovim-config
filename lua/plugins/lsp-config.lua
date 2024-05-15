@@ -17,35 +17,57 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
       -- lspconfig.tsserver.setup({
       --   capabilities = capabilities
       -- })
+
       lspconfig.angularls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.bashls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.cssls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities
-      })
-      lspconfig.jsonls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.emmet_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.lua_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            workspace = {
+              checkThirdParty = false,
+              -- Tells lua_ls where to find all the Lua files that you have loaded
+              -- for your neovim configuration.
+              library = {
+                "${3rd}/luv/library",
+                unpack(vim.api.nvim_get_runtime_file("", true)),
+              },
+              -- If lua_ls is really slow on your computer, you can try this instead:
+              -- library = { vim.env.VIMRUNTIME },
+            },
+            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            diagnostics = { disable = { 'missing-fields' } },
+          },
+        },
+      })
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.html.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.jsonls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.emmet_ls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
       })
       lspconfig.rust_analyzer.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.gopls.setup({
         capabilities = capabilities,
@@ -53,9 +75,12 @@ return {
         filetypes = { "go", "gomod", "gowork", "gotmpl" },
         root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
       })
+      lspconfig.yamlls.setup({
+        capabilities = capabilities,
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-      vim.keymap.set("n", "gd", function ()
+      vim.keymap.set("n", "gd", function()
         vim.lsp.buf.definition()
         vim.cmd("norm! zz")
       end, { desc = "Go to definition" })
@@ -76,12 +101,10 @@ return {
       vim.keymap.set("n", "<leader>lo", "<cmd>LspLog<CR>", { desc = "LSP Log" })
     end,
   },
-  
+
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
-  }
-
+  },
 }
-

@@ -90,6 +90,7 @@ map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 map("n", "<leader>x", "<leader>bd", { desc = "Delete buffer", remap = true })
+map("n", "<leader>X", "<leader>bd!", { desc = "Delete buffer (force)", remap = true })
 
 -- Diagnostic
 map("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float() <CR>", { desc = "Open diagnostic" })
