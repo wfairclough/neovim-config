@@ -66,6 +66,9 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
       })
+      -- lspconfig.python.setup({
+      --   capabilities = capabilities,
+      -- })
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
       })

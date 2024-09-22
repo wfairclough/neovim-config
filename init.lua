@@ -11,5 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("vim-options")
-require("lazy").setup("plugins")
+if vim.g.vscode then
+  -- VSCode extension
+  require("vscode-options")
+else
+  -- ordinary Neovim
+  require("vim-options")
+  require("lazy").setup("plugins")
+end
+
