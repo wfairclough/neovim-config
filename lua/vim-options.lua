@@ -33,6 +33,8 @@ map("n", "<leader>qw", ":wqa<CR>", { desc = "Write/Quit All" })
 map("n", "<leader>qf", "<cmd>qa!<CR>", { desc = "Quit All Force" })
 map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
 map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
+map("n", "<leader>vf", "ggVG", { desc = "Visally select entire file" })
+map("n", "<leader>yf", 'ggVG"+y', { desc = "Visally select entire file" })
 map("n", ";", ":", { nowait = true })
 
 -- Disable the S-Down and S-Up paging mappings
@@ -54,6 +56,7 @@ end)
 
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
+
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

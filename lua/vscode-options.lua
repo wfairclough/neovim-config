@@ -53,7 +53,8 @@ keymap({"n", "v"}, "<leader>cp", "<cmd>lua require('vscode').action('workbench.a
 keymap({"n", "v"}, "<leader>pr", "<cmd>lua require('vscode').action('code-runner.run')<CR>")
 keymap({"n", "v"}, "<leader>cf", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
 keymap({"n", "v"}, "<leader>rw", "<cmd>lua require('vscode').action('workbench.action.reloadWindow')<CR>")
-
+keymap({"n", "v"}, "<leader>vf", 'ggVG', { desc = "Visally select entire file" })
+keymap({"n", "v"}, "<leader>yf", 'ggVG"+y', { desc = "Visally select entire file" })
 
 -- harpoon keymaps
 keymap({"n", "v"}, "<leader>hm", "<cmd>lua require('vscode').action('vscode-harpoon.addEditor')<CR>")
