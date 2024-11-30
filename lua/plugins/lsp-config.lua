@@ -78,6 +78,20 @@ return {
         filetypes = { "go", "gomod", "gowork", "gotmpl" },
         root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
       })
+      lspconfig.sourcekit.setup({
+        capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+        },
+        -- root_dir = lspconfig.util.root_pattern(
+        --   '.git',
+        --   'Package.swift',
+        --   'compile_commands.json'
+        -- ),
+      })
       lspconfig.yamlls.setup({
         capabilities = capabilities,
       })
