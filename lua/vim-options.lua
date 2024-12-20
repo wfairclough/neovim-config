@@ -58,9 +58,11 @@ map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
 
--- Delete around { and also delete the current line with dd
-map("n", "dax", "da{dd", { desc = "Delete around {} and current line" })
+-- Delete around C-style blocks
+map("n", "dac", "da{dd", { desc = "Delete around {} and current line" })
 
+-- Yank around C-style blocks
+map("n", "yac", "?{<Enter>V$%y", { desc = "Yank around C-style block {}" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
