@@ -63,12 +63,10 @@ return {
       lspconfig.emmet_ls.setup({
         capabilities = capabilities,
       })
-      lspconfig.lua_ls.setup({
+      lspconfig.pyright.setup({
         capabilities = capabilities,
+        filetypes = { "python" },
       })
-      -- lspconfig.python.setup({
-      --   capabilities = capabilities,
-      -- })
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
       })

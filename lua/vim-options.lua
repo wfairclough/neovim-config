@@ -143,3 +143,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
 	end,
 })
+
+-- Open url with gx
+function open_url()
+    -- Get the word under the cursor
+    local url = vim.fn.expand('<cfile>')
+    -- Check if the word is a valid URL
+    if url:match('^https?://') then
+        -- Use the appropriate command based on the operating system
+        local opener = "xdg-open"  -- Default for Linux
+        if vim.fn.has('macunix') == 1 then
+            opener = "open"  -- For macOS
+        elseif vim.fn.has('win32') == 1 then
+            opener = "start"  -- For Windows
+        end
+        -- Execute the command to open the URL
+        os.execute(opener .. " " .. vim.fn.shellescape(url))
+    else
+        print("No valid URL under cursor")
+    end
+end
+
+-- Map gx to the open_url function
+map('n', 'gx', ':lua open_url()<CR>', { noremap = true, silent = true })
+
