@@ -11,10 +11,10 @@ vim.api.nvim_set_option("clipboard", "unnamed")
 vim.opt.clipboard = "unnamedplus"
 
 if vim.g.vscode then
-	-- VSCode extension
-	print("VSCode extension")
+  -- VSCode extension
+  print("VSCode extension")
 else
-	-- ordinary Neovim
+  -- ordinary Neovim
 end
 
 local map = vim.keymap.set
@@ -36,6 +36,7 @@ map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
 map("n", "<leader>vf", "ggVG", { desc = "Visally select entire file" })
 map("n", "<leader>yf", 'ggVG"+y', { desc = "Visally select entire file" })
 map("n", ";", ":", { nowait = true })
+-- map("n", "<M-?>", "<cmd>Telescope help_tags<CR>", { nowait = true, silent = true })
 
 -- Disable the S-Down and S-Up paging mappings
 map("n", "<S-Down>", "<Nop>", { silent = true })
@@ -45,18 +46,17 @@ map("n", "<C-d>", "<C-d>zz", { silent = true })
 map("n", "<C-u>", "<C-u>zz", { silent = true })
 
 map("n", "<leader>yp", function()
-	vim.cmd("let @+ = expand('%:p')")
+  vim.cmd("let @+ = expand('%:p')")
 end)
 map("n", "<leader>yt", function()
-	vim.cmd("let @+ = expand('%:t')")
+  vim.cmd("let @+ = expand('%:t')")
 end)
 map("n", "<leader>yd", function()
-	vim.cmd("let @+ = expand('%:p:h')")
+  vim.cmd("let @+ = expand('%:p:h')")
 end)
 
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
-
 
 -- Delete around C-style blocks
 map("n", "dac", "da{dd", { desc = "Delete around {} and current line" })
@@ -121,13 +121,13 @@ map("v", ">", ">gv")
 -- map({ "n" }, "cw", "ciw", { desc = "Change word", remap = true })
 map("n", "C", "c$", { desc = "Change to end of line", remap = true })
 map("n", "<leader>rn", function()
-	if vim.wo.relativenumber then
-		vim.wo.relativenumber = false
-		vim.wo.number = true
-	else
-		vim.wo.relativenumber = true
-		vim.wo.number = false
-	end
+  if vim.wo.relativenumber then
+    vim.wo.relativenumber = false
+    vim.wo.number = true
+  else
+    vim.wo.relativenumber = true
+    vim.wo.number = false
+  end
 end, { desc = "Toggle relative line numbers" })
 -- save file
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save file" })
@@ -136,34 +136,68 @@ map("n", "<leader>wf", "<cmd>wa!<cr>", { desc = "Save all files force" })
 
 -- Highlight Yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", {}),
-	desc = "Hightlight selection on yank",
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
-	end,
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  desc = "Hightlight selection on yank",
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+  end,
 })
 
 -- Open url with gx
 function open_url()
-    -- Get the word under the cursor
-    local url = vim.fn.expand('<cfile>')
-    -- Check if the word is a valid URL
-    if url:match('^https?://') then
-        -- Use the appropriate command based on the operating system
-        local opener = "xdg-open"  -- Default for Linux
-        if vim.fn.has('macunix') == 1 then
-            opener = "open"  -- For macOS
-        elseif vim.fn.has('win32') == 1 then
-            opener = "start"  -- For Windows
-        end
-        -- Execute the command to open the URL
-        os.execute(opener .. " " .. vim.fn.shellescape(url))
-    else
-        print("No valid URL under cursor")
+  local open_fn = function(uri)
+    -- Use the appropriate command based on the operating system
+    local opener = "xdg-open" -- Default for Linux
+    if vim.fn.has("macunix") == 1 then
+      opener = "open"       -- For macOS
+    elseif vim.fn.has("win32") == 1 then
+      opener = "start"      -- For Windows
     end
+    -- Execute the command to open the URL
+    os.execute(opener .. " " .. vim.fn.shellescape(uri))
+  end
+
+  -- Get the url text under the cursor
+  local url = vim.fn.expand("<cfile>")
+  -- Check if the word is a valid URL
+  if url:match("^https?://") then
+    open_fn(url)
+    return
+  end
+
+  -- Get the non-whitespace word under the cursor
+  local ticket = vim.fn.expand("<cWORD>")
+
+  -- If matches a Linear ticket pattern then open with browser to linear
+  if
+    ticket:match("^(DEVEX)%-[%d]+")
+    or ticket:match("^(COR)%-[%d]+")
+    or ticket:match("^(DATA)%-[%d]+")
+    or ticket:match("^(AII)%-[%d]+")
+    or ticket:match("^(AND)%-[%d]+")
+    or ticket:match("^(ARC)%-[%d]+")
+    or ticket:match("^(SEC)%-[%d]+")
+    or ticket:match("^(BUGS)%-[%d]+")
+    or ticket:match("^(APP)%-[%d]+") then
+    local linear_url = "linear://linear.app/issue/" .. ticket
+    print("linear_url", linear_url)
+    open_fn(linear_url)
+    return
+  end
+
+  print("No valid URL under cursor")
 end
 
 -- Map gx to the open_url function
-map('n', 'gx', ':lua open_url()<CR>', { noremap = true, silent = true })
+map("n", "gx", ":lua open_url()<CR>", { noremap = true, silent = true })
 
+function open_in_github()
+  local file = vim.fn.expand("%")
+  local line = vim.fn.line(".")
+  local command = "gh browse --path " .. file .. "#L" .. line
+  vim.cmd("!" .. command)
+end
+
+vim.api.nvim_create_user_command("OpenGitHub", open_in_github, {})
+vim.api.nvim_set_keymap("n", "<leader>gh", ":OpenGitHub<CR>", { noremap = true, silent = true })
