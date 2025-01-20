@@ -42,12 +42,16 @@ return {
               library = {
                 "${3rd}/luv/library",
                 unpack(vim.api.nvim_get_runtime_file("", true)),
+                "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/",
               },
               -- If lua_ls is really slow on your computer, you can try this instead:
               -- library = { vim.env.VIMRUNTIME },
             },
             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            diagnostics = { disable = { 'missing-fields' } },
+            diagnostics = {
+              disable = { "missing-fields" },
+              globals = { "vim", "hs" },
+            },
           },
         },
       })
@@ -62,6 +66,19 @@ return {
       })
       lspconfig.emmet_ls.setup({
         capabilities = capabilities,
+      })
+      local ps_bundle_path = (vim.fn.has("win32") == 1)
+        and "~/AppData/Local/nvim-data/mason/packages/powershell-editor-services"
+        or "~/.local/share/nvim/mason/packages/powershell-editor-services"
+      lspconfig.powershell_es.setup({
+        capabilities = capabilities,
+        shell = "pwsh",
+        filetypes = { "ps1", "psm1", "psd1" },
+        bundle_path = ps_bundle_path,
+        settings = { powershell = { codeFormatting = { Preset = "OTBS" } } },
+        init_options = {
+          enableProfileLoading = false,
+        },
       })
       lspconfig.pyright.setup({
         capabilities = capabilities,
@@ -91,6 +108,9 @@ return {
         -- ),
       })
       lspconfig.yamlls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.zls.setup({
         capabilities = capabilities,
       })
 
