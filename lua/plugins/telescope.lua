@@ -8,6 +8,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- Better and faster searching in telescope
+      { "nvim-telescope/telescope-github.nvim" },
     },
     config = function()
       require("telescope").setup({
@@ -35,7 +36,7 @@ return {
         pickers = {
           find_files = {
             hidden = true,
-            git_ignore = false,
+            git_ignore = true,
           },
           live_grep = {
             hidden = true,
@@ -44,6 +45,7 @@ return {
       })
 
       require("telescope").load_extension("fzf")
+      require("telescope").load_extension("gh")
 
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
@@ -71,11 +73,19 @@ return {
 
       -- LSP Pickers
       vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "Search Document symbols" })
+      vim.keymap.set("n", "<leader>@", "<leader>ss", { desc = "Search Document symbols", remap = true })
       vim.keymap.set("n", "<leader>sS", builtin.lsp_workspace_symbols, { desc = "Search Workspace symbols" })
+      vim.keymap.set("n", "<leader>w@", "<leader>sS", { desc = "Search Workspace symbols", remap = true })
       vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search References" })
       vim.keymap.set("n", "<leader>sd", builtin.lsp_definitions, { desc = "Search Definitions" })
       vim.keymap.set("n", "<leader>st", builtin.lsp_type_definitions, { desc = "Search Type Definitions" })
       vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, { desc = "Search Implementations" })
+
+      -- toggle the hidden files in the open file picker
+      vim.keymap.set("n", "<C-h>", function()
+        local opts = { hidden = not vim.o.hidden }
+        builtin.find_files(opts)
+      end, { desc = "Toggle Hidden Files" })
 
       require("telescope").load_extension("ui-select")
     end,

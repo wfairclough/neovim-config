@@ -55,6 +55,7 @@ map("n", "<leader>yd", function()
   vim.cmd("let @+ = expand('%:p:h')")
 end)
 
+map("n", "J", "<Nop>", { silent = true })
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -71,10 +72,10 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -201,3 +202,16 @@ end
 
 vim.api.nvim_create_user_command("OpenGitHub", open_in_github, {})
 vim.api.nvim_set_keymap("n", "<leader>gh", ":OpenGitHub<CR>", { noremap = true, silent = true })
+
+
+-- Ensure the file is reloaded when it changes
+vim.api.nvim_create_augroup("AutoReload", { clear = true })
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  group = "AutoReload",
+  callback = function()
+    if vim.bo.modifiable and not vim.bo.modified then
+      vim.cmd("checktime")
+    end
+  end,
+})
+

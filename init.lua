@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 if vim.g.vscode then
   -- VSCode extension
   require("vscode-options")
+  require("lazy").setup("plugins")
 else
   -- ordinary Neovim
   require("vim-options")
